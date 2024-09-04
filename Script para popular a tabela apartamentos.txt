@@ -1,0 +1,25 @@
+--Script para popular a tabela apartamentos
+
+DECLARE @ID INT = 1;
+DECLARE @Bloco INT = 1;
+DECLARE @Andar INT = 1;
+DECLARE @NumApartamento INT;
+
+WHILE @Bloco <= 2
+BEGIN
+    SET @Andar = 1;
+    WHILE @Andar <= 4
+    BEGIN
+        SET @NumApartamento = (@Andar - 1) * 5 + 1;
+        WHILE @NumApartamento <= @Andar * 5
+        BEGIN
+            INSERT INTO TB_Apartamento (ID_Apartamento, num_apartamento, bloco)
+            VALUES (@ID, @NumApartamento, @Bloco);
+
+            SET @ID = @ID + 1;
+            SET @NumApartamento = @NumApartamento + 1;
+        END;
+        SET @Andar = @Andar + 1;
+    END;
+    SET @Bloco = @Bloco + 1;
+END;
